@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "priyafactory-parameters"
+		},
+		"outputadlslinked_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'outputadlslinked'"
+		},
+		"sqlDBlinkedservice_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sqlDBlinkedservice'"
+		},
+		"outputadlslinked_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://priyastoage.dfs.core.windows.net/"
+		},
+		"sqlDBlinkedservice_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "priyasqlserver123.database.windows.net"
+		},
+		"sqlDBlinkedservice_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "priyaDB123"
+		},
+		"sqlDBlinkedservice_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "priya"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "priyafactory-parameters_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"outputadlslinked_accountKey": {
+						"value": "[parameters('outputadlslinked_accountKey')]"
+					},
+					"sqlDBlinkedservice_password": {
+						"value": "[parameters('sqlDBlinkedservice_password')]"
+					},
+					"outputadlslinked_properties_typeProperties_url": {
+						"value": "[parameters('outputadlslinked_properties_typeProperties_url')]"
+					},
+					"sqlDBlinkedservice_properties_typeProperties_server": {
+						"value": "[parameters('sqlDBlinkedservice_properties_typeProperties_server')]"
+					},
+					"sqlDBlinkedservice_properties_typeProperties_database": {
+						"value": "[parameters('sqlDBlinkedservice_properties_typeProperties_database')]"
+					},
+					"sqlDBlinkedservice_properties_typeProperties_userName": {
+						"value": "[parameters('sqlDBlinkedservice_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
