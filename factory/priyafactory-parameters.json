@@ -1,0 +1,9 @@
+{
+	"name": "priyafactory-parameters",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9f3cf853-0aef-4b6d-b9c3-05a183bdfce1",
+		"tenantId": "2306c05b-0263-4dfb-bb43-46c74fb84e4f"
+	}
+}
